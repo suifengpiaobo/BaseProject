@@ -1,0 +1,46 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.6.1'
+    //RX生命周期管理，避免内存泄漏
+    compile 'com.trello.rxlifecycle2:rxlifecycle:2.0.1'
+    compile 'com.trello.rxlifecycle2:rxlifecycle-components:2.0.1'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    //adapter-rxjava 导入rxjava1.5 与rxjava2 冲突，使用exclude排除对应jar包
+    compile('com.squareup.retrofit2:adapter-rxjava:2.1.0') { exclude(group: 'io.reactivex') }
+    //如果网络访问的是字符串，使用scalars转换器转换
+    //    compile 'com.squareup.retrofit2:converter-scalars:2.0.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.5.0'
+    //retrofit2 和 rxjava2适配
+    compile 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
+    compile 'pub.devrel:easypermissions:0.2.1'
+    compile 'com.liulishuo.filedownloader:library:1.4.2'//文件下载
+    compile 'com.tencent.bugly:crashreport:2.4.0'
+    compile 'com.ashokvarma.android:bottom-navigation-bar:1.3.1'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+}

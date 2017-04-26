@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">BaseProject</string>
+    <string name="downloading">正在下载</string>
+</resources>
