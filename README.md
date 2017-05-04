@@ -18,12 +18,9 @@ allprojects {
 2. 在app.gradle 文件中添加依赖，如下所示  
 ```JAVA
 dependencies {
-    compile 'com.github.flyzend:BaseProject:latest.integration'
+    compile 'com.github.flyzend:BaseProject:V1.0.1'
 }
 ```
-
-此方法导入最新版本 compile 'com.github.flyzend:BaseProject:latest.integration'  
-也可指定版本号如 compile 'com.github.flyzend:BaseProject:V1.0.0'
 
 # 详细的使用方式与介绍
 
