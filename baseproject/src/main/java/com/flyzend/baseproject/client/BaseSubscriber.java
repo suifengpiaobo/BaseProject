@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import com.flyzend.baseproject.AppManager;
 import com.flyzend.baseproject.utils.LogUtil;
 import com.flyzend.baseproject.utils.ToastUtil;
+import com.flyzend.baseproject.utils.Util;
 
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
@@ -29,6 +30,7 @@ public abstract class BaseSubscriber implements Subscriber<ResponseBody> {
     //是否显示加载对话框
     private boolean mIsShowDialog;
     protected Context mContext;
+    private String mLoadText;
 
 
     public BaseSubscriber(Context context, boolean isShowDialog) {
@@ -51,9 +53,17 @@ public abstract class BaseSubscriber implements Subscriber<ResponseBody> {
         this(true);
     }
 
+    public BaseSubscriber(String loadText){
+        this(true);
+        mLoadText = loadText;
+    }
+
     private void showDialog() {
         if (mLoadingDialog == null) {
-            mLoadingDialog = ProgressDialog.show(mContext, null, "正在努力加载中...",
+            if (Util.isEmpty(mLoadText)){
+                mLoadText = "正在努力加载中...";
+            }
+            mLoadingDialog = ProgressDialog.show(mContext, null, mLoadText,
                     true, true);
         }
         mLoadingDialog.show();

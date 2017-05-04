@@ -2,14 +2,15 @@ package com.flyzend.baseproject.fragment;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.flyzend.baseproject.dialog.BaseDialog;
 import com.flyzend.baseproject.utils.LogUtil;
 import com.flyzend.baseproject.utils.ToastUtil;
 import com.trello.rxlifecycle2.components.RxFragment;
@@ -57,39 +58,39 @@ public abstract class BaseFragment extends RxFragment implements View.OnClickLis
     }
 
     /**
-     * 通过action 和Uri 启动对应的Intent目标，如浏览器
-     * @param action
-     * @param data
+     * 最终调用的跳转方法
+     * @param startIntent intent
+     * @param bundle bundle数据
+     * @param requestCode 请求码 -1表示不需要回调
      */
-    protected void jumpToActivity(String action,Uri data){
-        Intent intent = new Intent();
-        if (action != null) {
-            intent.setAction(action);
-        }
-        if (data != null) {
-            intent.setData(data);
-        }
-        jumpToActivity(intent,0,false);
-    }
-
-    protected void jumpToActivity(Intent startIntent, int requestCode, boolean needReturnResult) {
+    private void jumpToActivity(Intent startIntent, Bundle bundle, int requestCode) {
         if (startIntent != null) {
-            if (!needReturnResult) {
-                startActivity(startIntent);
+            if (bundle != null) {
+                startIntent.putExtras(bundle);
             }
-            else{
-                startActivityForResult(startIntent,requestCode);
+            if (requestCode != -1) {
+                startActivity(startIntent);
+            } else {
+                startActivityForResult(startIntent, requestCode);
             }
         }
     }
+
     protected void jumpToActivity(Class<?> targetActivityClass) {
-        Intent startIntent = new Intent(mContext, targetActivityClass);
-        jumpToActivity(startIntent,0,false);
+        jumpToActivity(targetActivityClass,null);
     }
 
-    protected void jumpToActivity(Class<?> targetActiviyClass, int requestCode, boolean needReturnResult) {
-        Intent startIntent = new Intent(mContext,targetActiviyClass);
-        jumpToActivity(startIntent,requestCode,needReturnResult);
+    protected void jumpToActivity(Class<?> targetActivityClass, Bundle bundle) {
+        jumpToActivity(targetActivityClass,bundle,-1);
+    }
+
+    protected void jumpToActivity(Class<?> targetActiviyClass, int requestCode) {
+        jumpToActivity(targetActiviyClass,null,requestCode);
+    }
+
+    protected void jumpToActivity(Class<?> targetActiviyClass,Bundle bundle, int requestCode) {
+        Intent startIntent = new Intent(mContext, targetActiviyClass);
+        jumpToActivity(startIntent,bundle, requestCode);
     }
 
     protected abstract void initViews();
@@ -128,5 +129,9 @@ public abstract class BaseFragment extends RxFragment implements View.OnClickLis
     @Override
     public void onClick(View v) {
 
+    }
+
+    protected void showDialog(String title, String msg, DialogInterface.OnClickListener listener){
+        new BaseDialog(mContext).showDialog(title,msg,listener);
     }
 }

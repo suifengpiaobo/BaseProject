@@ -5,13 +5,14 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.flyzend.baseproject.AppManager;
+import com.flyzend.baseproject.dialog.BaseDialog;
 import com.flyzend.baseproject.utils.LogUtil;
 import com.flyzend.baseproject.utils.ToastUtil;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
@@ -68,25 +69,17 @@ public abstract class BaseActivity extends RxAppCompatActivity
     }
 
     /**
-     * 通过action 和Uri 启动对应的Intent目标，如浏览器
-     *
-     * @param action
-     * @param data
+     * 最终调用的跳转方法
+     * @param startIntent intent
+     * @param bundle bundle数据
+     * @param requestCode 请求码 -1表示不需要回调
      */
-    protected void jumpToActivity(String action, Uri data) {
-        Intent intent = new Intent();
-        if (action != null) {
-            intent.setAction(action);
-        }
-        if (data != null) {
-            intent.setData(data);
-        }
-        jumpToActivity(intent, 0, false);
-    }
-
-    protected void jumpToActivity(Intent startIntent, int requestCode, boolean needReturnResult) {
+    private void jumpToActivity(Intent startIntent, Bundle bundle, int requestCode) {
         if (startIntent != null) {
-            if (!needReturnResult) {
+            if (bundle != null) {
+                startIntent.putExtras(bundle);
+            }
+            if (requestCode != -1) {
                 startActivity(startIntent);
             } else {
                 startActivityForResult(startIntent, requestCode);
@@ -95,13 +88,20 @@ public abstract class BaseActivity extends RxAppCompatActivity
     }
 
     protected void jumpToActivity(Class<?> targetActivityClass) {
-        Intent startIntent = new Intent(mContext, targetActivityClass);
-        jumpToActivity(startIntent, 0, false);
+        jumpToActivity(targetActivityClass,null);
     }
 
-    protected void jumpToActivity(Class<?> targetActiviyClass, int requestCode, boolean needReturnResult) {
+    protected void jumpToActivity(Class<?> targetActivityClass, Bundle bundle) {
+        jumpToActivity(targetActivityClass,bundle,-1);
+    }
+
+    protected void jumpToActivity(Class<?> targetActiviyClass, int requestCode) {
+        jumpToActivity(targetActiviyClass,null,requestCode);
+    }
+
+    protected void jumpToActivity(Class<?> targetActiviyClass,Bundle bundle, int requestCode) {
         Intent startIntent = new Intent(mContext, targetActiviyClass);
-        jumpToActivity(startIntent, requestCode, needReturnResult);
+        jumpToActivity(startIntent,bundle, requestCode);
     }
 
     protected abstract void initViews();
@@ -117,6 +117,18 @@ public abstract class BaseActivity extends RxAppCompatActivity
         LogUtil.e(TAG, logBody);
     }
 
+    protected void v(String logBody) {
+        LogUtil.v(TAG, logBody);
+    }
+
+    protected void i(String logBody) {
+        LogUtil.i(TAG, logBody);
+    }
+
+    protected void d(String logBody) {
+        LogUtil.d(TAG, logBody);
+    }
+
     protected void showToast(String msg) {
         mToastUtil.showToast(msg);
     }
@@ -126,13 +138,17 @@ public abstract class BaseActivity extends RxAppCompatActivity
     }
 
     protected void showLoading() {
+        showLoading("正在努力加载中...");
+    }
+
+    protected void showLoading(String msg) {
         if (mLoadingDialog == null) {
-            mLoadingDialog = ProgressDialog.show(this, null, "正在努力加载中...", true, true);
+            mLoadingDialog = ProgressDialog.show(this, null, msg, true, true);
         }
         mLoadingDialog.show();
     }
 
-    protected void hideLoading() {
+    protected void dismissLoading() {
         if (mLoadingDialog != null) {
             mLoadingDialog.dismiss();
         }
@@ -178,11 +194,11 @@ public abstract class BaseActivity extends RxAppCompatActivity
      *
      * @param fragment_container
      */
-    protected void setFragment_container(int fragment_container) {
+    protected void setFragmentContainer(int fragment_container) {
         this.fragment_container = fragment_container;
     }
 
-    protected void switchPages(final int index) {
+    protected void switchFragment(final int index) {
         if (fragment_container == -1 || mFragments == null) {
             return;
         }
@@ -214,5 +230,9 @@ public abstract class BaseActivity extends RxAppCompatActivity
             }
         });
         fragmentTransaction.commitAllowingStateLoss();
+    }
+
+    protected void showDialog(String title, String msg, DialogInterface.OnClickListener listener){
+        new BaseDialog(mContext).showDialog(title,msg,listener);
     }
 }

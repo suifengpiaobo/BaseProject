@@ -26,14 +26,6 @@ public interface IBaseService {
     @GET()
     Flowable<ResponseBody> get(@Url String url);
 
-    /**
-     * Json请求，RequestBody的构造方式
-     * //    public static RequestBody getRequestBody(TreeMap<String,String> map){
-     * //        String strEntity = new Gson().toJson(map);
-     * //        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json;charset=UTF-8"),strEntity);
-     * //        return body;
-     * //    }
-     */
     @Headers({"Content-Type: application/json", "Accept: application/json"})//需要添加头
     @POST
     Flowable<ResponseBody> postJson(@Url String url, @Body RequestBody route);

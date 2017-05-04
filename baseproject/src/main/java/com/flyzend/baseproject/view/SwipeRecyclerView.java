@@ -73,7 +73,7 @@ public class SwipeRecyclerView extends LinearLayout{
         }
     }
 
-    public void setSwipeRefreshEnable(boolean enable){
+    public void setRefreshEnable(boolean enable){
         mSwipeRefreshLayout.setEnabled(enable);
     }
 

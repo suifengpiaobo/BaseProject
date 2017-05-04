@@ -5,15 +5,15 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.support.v7.widget.AppCompatImageButton;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.widget.ImageButton;
 
 /**
  * Created by 王灿 on 2017/2/28.
  * 通过滤镜来设置Img的点击变灰效果
  */
-public class DimImageView extends ImageButton {
+public class DimImageView extends AppCompatImageButton {
     public DimImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
         //代码设置background null

@@ -15,31 +15,30 @@ package com.flyzend.baseproject.utils;
 * @date 2016年10月9日
 *
 */
-public class Settings {
-	private static Settings instance;
+public class SettingUtils {
+	private static SettingUtils instance;
 	private PreferenceUtils preferenceUtils;
+	private static final String IS_LOGIN = "is_login";//用户是否登录
 
-	//缓存json数据
-	public void setCacheJsonData(String key, String json) {
-		preferenceUtils.put(key, json);
+	public void setIsLogin(boolean isLogin){
+		preferenceUtils.put(IS_LOGIN,isLogin);
 	}
 
-	//读取缓存json数据
-	public String getCacheJsonData(String key) {
-		return (String) preferenceUtils.get(key, "");
+	public boolean getIsLogin(){
+		return (Boolean) preferenceUtils.get(IS_LOGIN,false);
 	}
 
 
 	/**
 	* 创建一个新的实例 SettingsUtils.
 	*/
-	private Settings() {
+	private SettingUtils() {
 		preferenceUtils = PreferenceUtils.getInstance();
 	}
 	
-	public static synchronized Settings getInstance(){
+	public static synchronized SettingUtils getInstance(){
 		if (instance == null) {
-			instance = new Settings();
+			instance = new SettingUtils();
 		}
 		return instance;
 	}
