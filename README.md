@@ -6,31 +6,34 @@ BaseProject是一个快速构建app工程的开源项目，目的是为了更加
 ---
 [![](https://jitpack.io/v/flyzend/BaseProject.svg)](https://jitpack.io/#flyzend/BaseProject)
 1. 在project.gradle 文件中添加 maven { url "https://jitpack.io" } 如下所示
-```
+```JAVA
 allprojects {
     repositories {
         jcenter()
         maven { url "https://jitpack.io" }
     }
-}```
+}
+```
 
 2. 在app.gradle 文件中添加依赖，如下所示  
-  ```
+```JAVA
 dependencies {
     compile 'com.github.flyzend:BaseProject:latest.integration'
 }
 ```
-此方法导入最新版本 compile 'com.github.flyzend:BaseProject:latest.integration'
+
+此方法导入最新版本 compile 'com.github.flyzend:BaseProject:latest.integration'  
 也可指定版本号如 compile 'com.github.flyzend:BaseProject:V1.0.0'
 
-#详细的使用方式与介绍
-**[简书传送门：http://www.jianshu.com/p/d5ad3f127ebf](http://www.jianshu.com/p/d5ad3f127ebf)**
+# 详细的使用方式与介绍
+
+**[简书传送门：http://www.jianshu.com/p/d5ad3f127ebf](http://www.jianshu.com/p/d5ad3f127ebf)**  
 **[CSDN传送门：http://blog.csdn.net/u010302764/article/details/71170540#](http://blog.csdn.net/u010302764/article/details/71170540#)**
 
-#关于我
+# 关于我
 ---
 本人王灿，Android开发芸芸众生当中的一个新手，正在学习的路上不断爬坑！
-**不论文章还是代码，当然肯定有很多不够好的地方，希望各位大神不吝赐教，我一定虚心学习，可以评论或者在github上提issue，欢迎关注转发！转发请带上原文链接！谢谢**
-QQ：306217025
-简书：[http://www.jianshu.com/users/0d03dcfbfc36/timeline](http://www.jianshu.com/users/0d03dcfbfc36/timeline)
+**不论文章还是代码，当然肯定有很多不够好的地方，希望各位大神不吝赐教，我一定虚心学习，可以评论或者在github上提issue，欢迎关注转发！转发请带上原文链接！谢谢**  
+QQ：306217025  
+简书：[http://www.jianshu.com/users/0d03dcfbfc36/timeline](http://www.jianshu.com/users/0d03dcfbfc36/timeline)  
 CSDN: [http://blog.csdn.net/u010302764](http://blog.csdn.net/u010302764)
