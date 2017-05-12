@@ -104,10 +104,6 @@ public abstract class BaseActivity extends RxAppCompatActivity
         jumpToActivity(startIntent,bundle, requestCode);
     }
 
-    protected abstract void initViews();
-
-    protected abstract void initData();
-
     /**
      * 基类提供普通Log输出之error级信息输出
      *
