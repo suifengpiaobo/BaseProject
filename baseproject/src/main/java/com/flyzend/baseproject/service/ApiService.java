@@ -38,9 +38,14 @@ public class ApiService {
         return new BuildFlowable(rxFragment);
     }
 
+    public static BuildFlowable build(com.trello.rxlifecycle2.components.support.RxFragment v4Fragment){
+        return new BuildFlowable(v4Fragment);
+    }
+
     public static class BuildFlowable {
         private RxAppCompatActivity mRxAppCompatActivity;
         private RxFragment mRxFragment;
+        private com.trello.rxlifecycle2.components.support.RxFragment mV4Fragment;
 
         public BuildFlowable(RxAppCompatActivity rxAppCompatActivity) {
             mRxAppCompatActivity = rxAppCompatActivity;
@@ -50,6 +55,10 @@ public class ApiService {
             mRxFragment = rxFragment;
         }
 
+        public BuildFlowable(com.trello.rxlifecycle2.components.support.RxFragment v4Fragment){
+            mV4Fragment = v4Fragment;
+        }
+
         private Flowable<ResponseBody> bindLifeCycle(Flowable<ResponseBody> flowable) {
             flowable = flowable.subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread());
@@ -57,6 +66,8 @@ public class ApiService {
                 return flowable.compose(mRxAppCompatActivity.<ResponseBody>bindToLifecycle());
             } else if (mRxFragment != null) {
                 return flowable.compose(mRxFragment.<ResponseBody>bindToLifecycle());
+            } else if (mV4Fragment != null){
+                return flowable.compose(mV4Fragment.<ResponseBody>bindToLifecycle());
             }
             return flowable;
         }

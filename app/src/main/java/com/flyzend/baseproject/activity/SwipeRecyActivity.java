@@ -32,7 +32,6 @@ public class SwipeRecyActivity extends BaseActivity
         initData();
     }
 
-    @Override
     protected void initViews() {
         mSwipeRecyclerView = findAviewById(R.id.swipeRecyclerView);
         //设置下拉刷新监听
@@ -41,7 +40,6 @@ public class SwipeRecyActivity extends BaseActivity
         mSwipeRecyclerView.setRefreshing(true);
     }
 
-    @Override
     protected void initData() {
         //模拟网络耗时操作，2秒后执行接下来操作
         Flowable.timer(2, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<Long>() {

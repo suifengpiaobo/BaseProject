@@ -25,7 +25,6 @@ public class FragmentActivity extends BaseActivity {
         initData();
     }
 
-    @Override
     protected void initViews() {
         mTabLayout = findAviewById(R.id.tab);
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);
@@ -51,7 +50,6 @@ public class FragmentActivity extends BaseActivity {
         });
     }
 
-    @Override
     protected void initData() {
         mFragments.add(new OneFragment());
         mFragments.add(new TwoFragment());

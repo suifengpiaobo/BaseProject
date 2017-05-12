@@ -84,7 +84,6 @@ public class MainActivity extends BaseActivity {
         SettingUtils.getInstance().getIsLogin();//获取登录配置项，false为默认值
     }
 
-    @Override
     protected void initViews() {
         image = findAviewById(R.id.image);
         //Toast
@@ -133,10 +132,5 @@ public class MainActivity extends BaseActivity {
                 jumpToActivity(SwipeRecyActivity.class);
             }
         });
-    }
-
-    @Override
-    protected void initData() {
-
     }
 }

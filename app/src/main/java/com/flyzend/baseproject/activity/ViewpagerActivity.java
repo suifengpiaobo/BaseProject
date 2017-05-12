@@ -26,13 +26,11 @@ public class ViewpagerActivity extends BaseActivity {
         initData();
     }
 
-    @Override
     protected void initViews() {
         mViewPager = findAviewById(R.id.viewpager);
         mViews = new ArrayList<>();
     }
 
-    @Override
     protected void initData() {
         Flowable.just("view1","view2","view3","view4").subscribe(new Consumer<String>() {
             @Override

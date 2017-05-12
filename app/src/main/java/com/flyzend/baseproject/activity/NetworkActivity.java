@@ -48,13 +48,7 @@ public class NetworkActivity extends BaseActivity {
 //        });
     }
 
-    @Override
     protected void initViews() {
         mTextView = findAviewById(R.id.text);
-    }
-
-    @Override
-    protected void initData() {
-
     }
 }
