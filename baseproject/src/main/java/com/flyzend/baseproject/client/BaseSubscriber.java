@@ -26,11 +26,11 @@ public abstract class BaseSubscriber implements Subscriber<ResponseBody> {
     protected ToastUtil mToastUtil;
     private static final String TAG = "BaseSubscriber";
     //加载对话框
-    private ProgressDialog mLoadingDialog;
+    protected ProgressDialog mLoadingDialog;
     //是否显示加载对话框
-    private boolean mIsShowDialog;
+    protected boolean mIsShowDialog;
     protected Context mContext;
-    private String mLoadText;
+    protected String mLoadText;
 
 
     public BaseSubscriber(Context context, boolean isShowDialog) {
@@ -58,7 +58,7 @@ public abstract class BaseSubscriber implements Subscriber<ResponseBody> {
         mLoadText = loadText;
     }
 
-    private void showDialog() {
+    protected void showDialog() {
         if (mLoadingDialog == null) {
             if (Util.isEmpty(mLoadText)){
                 mLoadText = "正在努力加载中...";
@@ -69,7 +69,7 @@ public abstract class BaseSubscriber implements Subscriber<ResponseBody> {
         mLoadingDialog.show();
     }
 
-    private void disMissDialog() {
+    protected void disMissDialog() {
         if (mLoadingDialog != null) {
             mLoadingDialog.dismiss();
         }
