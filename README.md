@@ -35,4 +35,5 @@ QQ：306217025
 简书：[http://www.jianshu.com/users/0d03dcfbfc36/timeline](http://www.jianshu.com/users/0d03dcfbfc36/timeline)  
 CSDN: [http://blog.csdn.net/u010302764](http://blog.csdn.net/u010302764)  
 
+Android 开发技术交流群号：436077375  
 ![Android 开发技术交流群号：436077375](https://github.com/flyzend/BaseProject/blob/master/GIF/Android&%2332;%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E4%BA%A4%E6%B5%81%E7%BE%A4%E7%BE%A4%E4%BA%8C%E7%BB%B4%E7%A0%81.png?raw=true)
